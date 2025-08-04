@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
   const contacts = await getAllContacts();
   res.status(200).json({
     status: 200,
-    message: 'Successfully found contacts!',
+    message: 'Successfully found contacts',
     data: contacts,
   });
 });
@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
 
     res.status(201).json({
       status: 201,
-      message: 'Contact created successfully!',
+      message: 'Contact created successfully',
       data: newContact,
     });
   } catch (error) {
