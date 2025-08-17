@@ -14,12 +14,10 @@ async function start() {
       process.exit(1);
     }
 
-    await initMongoConnection(); // içinde try/catch varsa loglasın; yoksa buradaki catch yakalar
+    await initMongoConnection();
     console.log('✅ MongoDB connected');
 
     const app = setupServer();
-
-    // Basit health route (istersen server.js içinde de tanımlayabilirsin)
     app.get('/health', (_req, res) => res.json({ ok: true }));
 
     app.listen(PORT, '0.0.0.0', () => {

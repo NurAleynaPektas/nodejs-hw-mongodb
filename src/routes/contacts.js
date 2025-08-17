@@ -1,4 +1,3 @@
-// src/routes/contacts.js
 import { Router } from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
@@ -19,7 +18,6 @@ import {
 
 const router = Router();
 
-// Listele (pagination + sort + filter query'leri burada okunuyor)
 router.get('/', ctrlWrapper(getAll));
 
 // ID ile getir
