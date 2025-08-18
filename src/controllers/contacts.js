@@ -5,11 +5,9 @@ import {
   createContact,
   updateContact,
   deleteContact,
-
 } from '../services/contacts.js';
 
 export const getAll = async (req, res) => {
-  
   const {
     page = '1',
     perPage = '10',
@@ -22,7 +20,6 @@ export const getAll = async (req, res) => {
   const pageNum = Math.max(parseInt(page, 10) || 1, 1);
   const perPageNum = Math.max(parseInt(perPage, 10) || 10, 1);
 
- 
   const allowedSortFields = [
     'name',
     'email',
@@ -75,7 +72,6 @@ export const getById = async (req, res) => {
 
 /** POST /contacts */
 export const createOne = async (req, res) => {
-
   const { name, phoneNumber, email, isFavourite, contactType } = req.body;
   if (!name || !phoneNumber) {
     throw createError(400, 'name and phoneNumber are required');
@@ -100,12 +96,20 @@ export const createOne = async (req, res) => {
 export const patchOne = async (req, res) => {
   const { contactId } = req.params;
 
-  const updated = await updateContact(contactId, req.body);
-  if (!updated) throw createError(404, 'Contact not found');
+  // Eğer body boşsa direk hata dön
+  if (!Object.keys(req.body).length) {
+    throw createError(400, 'Missing fields for update');
+  }
 
-  res.json({
+  const updated = await updateContact(contactId, req.body);
+
+  if (!updated) {
+    throw createError(404, 'Contact not found');
+  }
+
+  return res.json({
     status: 200,
-    message: 'Successfully patched a contact!',
+    message: 'Successfully updated the contact!',
     data: updated,
   });
 };
@@ -114,11 +118,11 @@ export const patchOne = async (req, res) => {
 export const removeOne = async (req, res) => {
   const { contactId } = req.params;
   const deleted = await deleteContact(contactId);
-  if (!deleted) throw createError(404, "Contact not found");
+  if (!deleted) throw createError(404, 'Contact not found');
 
   return res.json({
     status: 200,
-    message: "Successfully deleted a contact!",
+    message: 'Successfully deleted a contact!',
     data: { id: deleted._id },
   });
 };
