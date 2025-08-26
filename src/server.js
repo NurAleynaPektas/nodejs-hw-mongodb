@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
 import contactsRouter from './routes/contacts.js';
-import authRouter from './routes/auth.js'; 
+import authRouter from './routes/auth.js';
 
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
@@ -20,8 +20,9 @@ export function setupServer() {
   app.use(express.json());
   app.use(cookieParser());
 
+  app.get('/health', (_req, res) => res.json({ ok: true }));
   // Auth rotaları
-  app.use('/auth', authRouter); 
+  app.use('/auth', authRouter);
 
   // Contacts rotaları
   app.use('/contacts', contactsRouter);

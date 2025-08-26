@@ -54,7 +54,7 @@ export const login = async (req, res) => {
   res.json({
     status: 200,
     message: 'Successfully logged in an user!',
-    data: { accessToken },
+    data: { accessToken,refreshToken },
   });
 };
 
