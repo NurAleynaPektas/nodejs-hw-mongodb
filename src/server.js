@@ -25,13 +25,13 @@ export function setupServer() {
     const routes = [];
     app._router.stack.forEach((middleware) => {
       if (middleware.route) {
-        // normal route
+    
         routes.push({
           path: middleware.route.path,
           methods: Object.keys(middleware.route.methods),
         });
       } else if (middleware.name === 'router') {
-        // mounted router
+       
         middleware.handle.stack.forEach((handler) => {
           const route = handler.route;
           if (route) {
@@ -49,7 +49,7 @@ export function setupServer() {
 
   app.get('/_debug/smtp', async (_req, res) => {
     try {
-      // Nodemailer bağlantı doğrulaması
+    
       await mailer.verify();
       res.json({ ok: true, message: 'SMTP verify passed' });
     } catch (e) {
