@@ -169,11 +169,11 @@ export const resetPassword = async (req, res) => {
     throw createHttpError(404, 'User not found!');
   }
 
-  // Şifreyi hashle
+
   const bcrypt = await import('bcrypt');
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  // Kullanıcının şifresini güncelle
+  
   user.password = hashedPassword;
   await user.save();
 
