@@ -21,6 +21,32 @@ export function setupServer() {
   app.use(express.json());
   app.use(cookieParser());
 
+  app.get('/_debug/routes', (_req, res) => {
+    const routes = [];
+    app._router.stack.forEach((middleware) => {
+      if (middleware.route) {
+        // normal route
+        routes.push({
+          path: middleware.route.path,
+          methods: Object.keys(middleware.route.methods),
+        });
+      } else if (middleware.name === 'router') {
+        // mounted router
+        middleware.handle.stack.forEach((handler) => {
+          const route = handler.route;
+          if (route) {
+            routes.push({
+              path: route.path,
+              methods: Object.keys(route.methods),
+            });
+          }
+        });
+      }
+    });
+    res.json(routes);
+  });
+
+
   app.get('/_debug/smtp', async (_req, res) => {
     try {
       // Nodemailer bağlantı doğrulaması
