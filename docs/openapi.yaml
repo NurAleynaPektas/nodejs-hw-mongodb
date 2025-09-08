@@ -25,6 +25,15 @@ paths:
   /contacts/{contactId}:
     $ref: ../swagger/paths/contacts/_contactId/index.yaml
 
+  /auth/register:
+    $ref: ../swagger/paths/auth/register.yaml
+  /auth/login:
+    $ref: ../swagger/paths/auth/login.yaml
+  /auth/refresh:
+    $ref: ../swagger/paths/auth/refresh.yaml
+  /auth/logout:
+    $ref: ../swagger/paths/auth/logout.yaml
+
 components:
   securitySchemes:
     bearerAuth:
@@ -38,23 +47,23 @@ components:
       properties:
         _id:
           type: string
-          example: "68ab4c0aaa4f8455f8c4139c"
+          example: '68ab4c0aaa4f8455f8c4139c'
         name:
           type: string
-          example: "Nur"
+          example: 'Nur'
         phoneNumber:
           type: string
-          example: "555-123-4567"
+          example: '555-123-4567'
         email:
           type: string
-          example: "nur@example.com"
+          example: 'nur@example.com'
         isFavourite:
           type: boolean
           example: false
         contactType:
           type: string
           enum: [work, home, personal]
-          example: "work"
+          example: 'work'
         createdAt:
           type: string
           format: date-time
@@ -70,7 +79,7 @@ components:
           example: 200
         message:
           type: string
-          example: "Successfully found contact"
+          example: 'Successfully found contact'
         data:
           $ref: '#/components/schemas/Contact'
 
@@ -82,7 +91,7 @@ components:
           example: 200
         message:
           type: string
-          example: "Successfully found contacts"
+          example: 'Successfully found contacts'
         data:
           type: array
           items:
@@ -96,10 +105,10 @@ components:
           example: 404
         message:
           type: string
-          example: "Route not found"
+          example: 'Route not found'
         data:
           type: string
-          example: "Stack or details..."
+          example: 'Stack or details...'
 
     ContactInput:
       type: object
@@ -107,20 +116,20 @@ components:
       properties:
         name:
           type: string
-          example: "Ali Veli"
+          example: 'Ali Veli'
         phoneNumber:
           type: string
-          example: "555-000-0000"
+          example: '555-000-0000'
         email:
           type: string
-          example: "ali@example.com"
+          example: 'ali@example.com'
         isFavourite:
           type: boolean
           example: false
         contactType:
           type: string
           enum: [work, home, personal]
-          example: "work"
+          example: 'work'
 
     ContactUpdate:
       type: object
