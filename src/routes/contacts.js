@@ -19,7 +19,9 @@ import {
 } from '../validation/contactsSchemas.js';
 
 const router = Router();
-
+router.get('/_debug', (_req, res) => {
+  res.json({ ok: true, where: 'auth router mounted' });
+});
 // Tüm contact rotalarını koruma altına al
 router.use(authenticate);
 
