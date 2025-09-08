@@ -28,8 +28,8 @@ export function setupServer() {
 
   // Health check
   app.get('/health', (_req, res) => res.json({ ok: true }));
-
-  // --- DEBUG ENDPOINTS (opsiyonel) ---
+  app.get('/', (_req, res) => res.json({ ok: true, docs: '/api-docs' }));
+ 
   // Rotaları listeleme
   app.get('/_debug/routes', (_req, res) => {
     const out = [];
