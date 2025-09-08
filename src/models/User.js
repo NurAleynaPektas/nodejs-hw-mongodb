@@ -18,14 +18,11 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true, // Hash’li saklanacak (register servisinde hashleyeceğiz)
+      required: true,
       minlength: 6,
     },
   },
   { timestamps: true, versionKey: false }
 );
-
-// Email için index
-userSchema.index({ email: 1 }, { unique: true });
 
 export const User = model('User', userSchema, 'users');
